@@ -5,16 +5,15 @@
 namespace sharpGP2Y1010AU0F {
     const REFERENCE_VOLTAGE = 3000.0; // mV
     const NODUST_VOLTAGE = 400.0; // mV
-    const CONVERSION_RATIO = 0.17; // ug/m3 / mV
+    const CONVERSION_RATIO = 0.17; // μg/m3 / mV
     const WAVESHARE_DIVIDER = 11;
-    const PULSE_TIME = 320; // us, SPEC
-    const SAMPLING_TIME = 280; // us, SPEC
-    const DELTA_TIME = 40; // us, PULSE_TIME - SAMPLING_TIME, valid for analogReadPin with ZERO runtime
-    const CYCLE_TIME = 10000; // ms, SPEC 
-    const SLEEP_TIME = 9680; // ms, SPEC: pulse cycle 10 ms (CYCLE_TIME - PULSE_TIME)     
+    const PULSE_TIME = 320; // μs, SPEC
+    const SAMPLING_TIME = 280; // μs, SPEC
+    const PINREAD_TIME = 80; // μs, for calliope 
+    const CYCLE_TIME = 10000; // ms, SPEC recommended
     const VLED_ON = 1;
     const VLED_OFF = 0;
-    let SAMPLES = 10;
+    let SAMPLES = 10; // SPEC recommended
     let VLED = 0; // digital out PIN
     let VO = 0; // analog in PIN
 
@@ -39,14 +38,19 @@ namespace sharpGP2Y1010AU0F {
         if ((VLED == 0) || (VO == 0)) {
             return 0
         }
+        let delta_time = PULSE_TIME - SAMPLING_TIME - PINREAD_TIME;
+        if (delta_time < 0) {
+            delta_time = 0;
+        }
+        let sleep_time = CYCLE_TIME - Math.max(PULSE_TIME, SAMPLING_TIME + PINREAD_TIME)
         for (let i = 0; i < SAMPLES; i++) {
             // LED on
             pins.digitalWritePin(VLED, VLED_ON);
             control.waitMicros(SAMPLING_TIME);
             voltage = pins.analogReadPin(VO);
-            control.waitMicros(DELTA_TIME);
+            control.waitMicros(delta_time);
             pins.digitalWritePin(VLED, VLED_OFF);
-            control.waitMicros(SLEEP_TIME);
+            control.waitMicros(sleep_time);
             voltage = pins.map(
                 voltage,
                 0,
