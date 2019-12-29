@@ -4,8 +4,7 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "radio": "*",
-        "pxt-calliope-sim7020e": "workspace:81c15b1d-fab2-43f9-302e-b90a05db2197"
+        "radio": "*"
     },
     "files": [
         "README.md",
