@@ -3,9 +3,9 @@
  */
 //% weight=100 color= #239b56 icon="\uf863"
 namespace sharpGP2Y1010AU0F {
-    const REFERENCE_VOLTAGE = 3000.0; // mV
-    const NODUST_VOLTAGE = 400.0; // mV
-    const CONVERSION_RATIO = 0.17; // μg/m3 / mV
+    const REFERENCE_VOLTAGE = 3000; // mV
+    const NODUST_VOLTAGE = 400; // mV
+    const CONVERSION_RATIO = 17; // μg/m3 / mV; in percent
     const WAVESHARE_DIVIDER = 11;
     const PULSE_TIME = 320; // μs, SPEC
     const SAMPLING_TIME = 280; // μs, SPEC
@@ -67,10 +67,10 @@ namespace sharpGP2Y1010AU0F {
     //% block
     export function getDustValue(): number {
         let dust = 0.0;
-        dust = CONVERSION_RATIO * (getSensorRAWValue() * WAVESHARE_DIVIDER - NODUST_VOLTAGE);
+        dust = CONVERSION_RATIO * (getSensorRAWValue() * WAVESHARE_DIVIDER - NODUST_VOLTAGE) / 100;
         if (dust < 0) {
             dust = 0
         }
-        return Math.round(dust)
+        return dust;
     }
 }
