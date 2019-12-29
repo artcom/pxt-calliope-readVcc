@@ -1,7 +1,7 @@
 /**
  * Benutzerdefinierte Blöcke
  */
-//% weight=100 color= #239b56 icon="\uf863"
+//% weight=100 color= #239b56 icon="\uf2dc"
 namespace sharpGP2Y1010AU0F {
     const REFERENCE_VOLTAGE = 3000; // mV
     const NODUST_VOLTAGE = 400; // mV
