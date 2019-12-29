@@ -17,11 +17,6 @@ namespace sharpGP2Y1010AU0F {
     let VLED = 0; // digital out PIN
     let VO = 0; // analog in PIN
 
-    /**
-         * get dust value (μg/m³) 
-         * @param vLED describe parameter here, eg: DigitalPin.P16 (microbit), DigitalPin.P3 (calliope)
-         * @param vo describe parameter here, eg: AnalogPin.P1 (microbit), AnalogPin.P2 (calliope)
-    */
     //% block
     export function initDustSensor(vled: DigitalPin, vo: AnalogPin, samples?: number) {
         VLED = vled;
