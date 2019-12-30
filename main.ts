@@ -17,7 +17,10 @@ namespace sharpGP2Y1010AU0F {
     let VLED = 0; // digital out PIN
     let VO = 0; // analog in PIN
 
-    //% block
+    //% blockId="initDustSensor" block="initialize dustsensor with DigitalPin %vled | AnalogPin %vo| and Samples %samples"
+    //% vled.defl=DigitalPin.P3
+    //% vo.defl=AnalogPin.P2
+    //% samples.defl=10    
     export function initDustSensor(vled: DigitalPin, vo: AnalogPin, samples?: number) {
         VLED = vled;
         VO = vo;
@@ -26,7 +29,7 @@ namespace sharpGP2Y1010AU0F {
         }
     }
 
-    //% block
+    //% blockId="getSensorRAWValue" block="get RAW value in mV from dustsensor"
     export function getSensorRAWValue(): number {
         let voltage = 0.0;
         let sum_voltage = 0.0;
@@ -59,7 +62,7 @@ namespace sharpGP2Y1010AU0F {
         return voltage;
     }
 
-    //% block
+    //% blockId="getDustValue" block="get dust value from dustsensor."
     export function getDustValue(): number {
         let dust = 0.0;
         dust = CONVERSION_RATIO * (getSensorRAWValue() * WAVESHARE_DIVIDER - NODUST_VOLTAGE) / 100;
