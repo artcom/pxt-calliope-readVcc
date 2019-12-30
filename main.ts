@@ -60,7 +60,7 @@ namespace sharpGP2Y1010AU0F {
         return voltage * WAVESHARE_DIVIDER;
     }
 
-    //% blockId="getDustValue" block="get dust value from dustsensor."
+    //% blockId="getDustValue" block="get dust value in μg/m3 from dustsensor."
     export function getDustValue(): number {
         let dust = 0.0;
         dust = (getSensorRAWValue() - NODUST_VOLTAGE) * CONVERSION_RATIO / 100;
