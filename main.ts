@@ -6,7 +6,7 @@
 //% weight=10 color=#0fbc11 icon=""
 namespace sharpGP2Y1010AU0F {
     const REFERENCE_VOLTAGE = 3000; // mV
-    const NODUST_VOLTAGE = 400; // mV
+    const NODUST_VOLTAGE = 600; // mV
     const CONVERSION_RATIO = 17; // μg/m3 / mV; in percent
     const WAVESHARE_DIVIDER = 11;
     const PULSE_TIME = 320; // μs, SPEC
@@ -50,7 +50,7 @@ namespace sharpGP2Y1010AU0F {
             voltage = pins.analogReadPin(VO);
             if (delta_time > 0) {
                 control.waitMicros(delta_time);
-            }    
+            }
             pins.digitalWritePin(VLED, VLED_OFF);
             control.waitMicros(sleep_time);
             voltage = pins.map(
