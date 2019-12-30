@@ -1,5 +1,7 @@
 /**
- * Benutzerdefinierte Blöcke
+ * Sharp GP2Y1010AU0F Dust Sensor extension for calliope.
+ * WAVESHARE module edition. 
+ * https://www.waveshare.com/dust-sensor.htm
  */
 //% weight=10 color=#0fbc11 icon=""
 namespace sharpGP2Y1010AU0F {
@@ -10,7 +12,7 @@ namespace sharpGP2Y1010AU0F {
     const PULSE_TIME = 320; // μs, SPEC
     const SAMPLING_TIME = 280; // μs, SPEC
     const PINREAD_TIME = 80; // μs, for calliope 
-    const CYCLE_TIME = 10000; // ms, SPEC recommended
+    const CYCLE_TIME = 10000; // μs, SPEC recommended
     const VLED_ON = 1;
     const VLED_OFF = 0;
     let SAMPLES = 10; // SPEC recommended
@@ -46,7 +48,9 @@ namespace sharpGP2Y1010AU0F {
             pins.digitalWritePin(VLED, VLED_ON);
             control.waitMicros(SAMPLING_TIME);
             voltage = pins.analogReadPin(VO);
-            control.waitMicros(delta_time);
+            if (delta_time > 0) {
+                control.waitMicros(delta_time);
+            }    
             pins.digitalWritePin(VLED, VLED_OFF);
             control.waitMicros(sleep_time);
             voltage = pins.map(
