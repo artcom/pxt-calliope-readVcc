@@ -7,7 +7,7 @@
 namespace sharpGP2Y1010AU0F {
     const REFERENCE_VOLTAGE = 3000; // mV
     const NODUST_VOLTAGE = 600; // mV
-    const CONVERSION_RATIO = 17; // μg/m3 / mV; in percent
+    const CONVERSION_RATIO = 20; // μg/m3 / mV, SPEC; in percent
     const WAVESHARE_DIVIDER = 11;
     const PULSE_TIME = 320; // μs, SPEC
     const SAMPLING_TIME = 280; // μs, SPEC
@@ -53,23 +53,17 @@ namespace sharpGP2Y1010AU0F {
             }
             pins.digitalWritePin(VLED, VLED_OFF);
             control.waitMicros(sleep_time);
-            voltage = pins.map(
-                voltage,
-                0,
-                1023,
-                0,
-                REFERENCE_VOLTAGE
-            );
+            voltage = REFERENCE_VOLTAGE / 1023 * voltage;
             sum_voltage += voltage;
         }
         voltage = sum_voltage / SAMPLES; // mV
-        return voltage;
+        return voltage * WAVESHARE_DIVIDER;
     }
 
     //% blockId="getDustValue" block="get dust value from dustsensor."
     export function getDustValue(): number {
         let dust = 0.0;
-        dust = CONVERSION_RATIO * (getSensorRAWValue() * WAVESHARE_DIVIDER - NODUST_VOLTAGE) / 100;
+        dust = (getSensorRAWValue() - NODUST_VOLTAGE) * CONVERSION_RATIO / 100;
         if (dust < 0) {
             dust = 0
         }
