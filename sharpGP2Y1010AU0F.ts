@@ -67,7 +67,7 @@ namespace sharpGP2Y1010AU0F {
             }
             pins.digitalWritePin(VLED, VLED_OFF);
             control.waitMicros(sleep_time);
-            voltage = analogvalue * REFERENCE_VOLTAGE / 1023;
+            voltage = REFERENCE_VOLTAGE / 1023 * analogvalue;
             sum_voltage += voltage;
         }
         voltage = sum_voltage / SAMPLES; // mV
