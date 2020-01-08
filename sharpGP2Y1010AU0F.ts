@@ -47,9 +47,9 @@ namespace sharpGP2Y1010AU0F {
 
     //% blockId="getSensorRAWValue" block="get RAW value in mV from dustsensor"
     export function getSensorRAWValue(): number {
-        let analogvalue = 0;
-	let voltage = 0;
-        let sum_voltage = 0;
+        let analogvalue = 0.0;
+	let voltage = 0.0;
+        let sum_voltage = 0.0;
         if ((VLED == 0) || (VO == 0)) {
             return 0
         }
