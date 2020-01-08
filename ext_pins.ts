@@ -15,7 +15,7 @@ namespace pins {
     export function analogReadPinInternalRef(name: AnalogPin) {
 	if (!ADC_initialized) {
 	    // init ADC CONFIG
-    	    let dummy = pins.analogReadPin(AnalogPin.P1);
+    	    let dummy = pins.analogReadPin(AnalogPin.P2);
 	    ADC_initialized = true;
 	}
         // ADC internal 1.2V voltage REF
