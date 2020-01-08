@@ -16,14 +16,14 @@ namespace pins {
 	if (!ADC_initialized) {
 	    // init ADC CONFIG
     	    let dummy = pins.analogReadPin(AnalogPin.P2);
+            // ADC internal 1.2V voltage REF
+	    ADCConfig.clearREFSEL();
 	    ADC_initialized = true;
 	}
-        // ADC internal 1.2V voltage REF
-        ADCConfig.clearREFSEL();
 	// read analog value
         let analogvalue = pins.analogReadPin(name);
         // ADC external VDD voltage REF
-        ADCConfig.setREFSEL();
+        // ADCConfig.setREFSEL();
 	// Internal prescaling
         return (analogvalue * 3);
     }
