@@ -2,10 +2,19 @@
  * Sharp GP2Y1010AU0F Dust Sensor extension for calliope.
  * WAVESHARE module edition. 
  * https://www.waveshare.com/dust-sensor.htm
+ *
+ * @author Raik Andritschke
+ *
+ * Optional using nRF51 Internal voltage reference instead of VDD
  */
 //% weight=10 color=#0fbc11 icon=""
 namespace sharpGP2Y1010AU0F {
-    const REFERENCE_VOLTAGE = 3000; // mV
+    export enum ReferenceVoltage {
+	//% block=Internal Reference Voltage
+	REFERENCE_VOLTAGE_INT = 1200, // mV; internal REF nRF51x
+	//% block=External Reference Voltage
+	REFERENCE_VOLTAGE_EXT = 3000 // mV; external REF nRF51x, USB or battery
+    }
     const NODUST_VOLTAGE = 600; // mV
     const CONVERSION_RATIO = 20; // μg/m3 / mV, SPEC; in percent
     const WAVESHARE_DIVIDER = 11;
@@ -18,23 +27,29 @@ namespace sharpGP2Y1010AU0F {
     let SAMPLES = 10; // SPEC recommended
     let VLED = 0; // digital out PIN
     let VO = 0; // analog in PIN
-
+    let REFERENCE_VOLTAGE = ReferenceVoltage.REFERENCE_VOLTAGE_INT;
     //% blockId="initDustSensor" block="initialize dustsensor with DigitalPin %vled | AnalogPin %vo| and Samples %samples"
-    //% vled.defl=DigitalPin.P3
+    //% vled.defl=DigitalPin.P0
     //% vo.defl=AnalogPin.P2
     //% samples.defl=10    
-    export function initDustSensor(vled: DigitalPin, vo: AnalogPin, samples?: number) {
+    //% reference.defl=REFERENCE_VOLTAGE_EXT
+    export function initDustSensor(vled: DigitalPin, vo: AnalogPin, samples: number, reference: ReferenceVoltage) {
         VLED = vled;
         VO = vo;
         if (samples) {
             SAMPLES = samples;
         }
+	REFERENCE_VOLTAGE = reference;
+        if ((VLED == 0) || (VO == 0)) {
+            return;
+        }
     }
 
     //% blockId="getSensorRAWValue" block="get RAW value in mV from dustsensor"
     export function getSensorRAWValue(): number {
-        let voltage = 0.0;
-        let sum_voltage = 0.0;
+        let analogvalue = 0;
+	let voltage = 0;
+        let sum_voltage = 0;
         if ((VLED == 0) || (VO == 0)) {
             return 0
         }
@@ -47,13 +62,17 @@ namespace sharpGP2Y1010AU0F {
             // LED on
             pins.digitalWritePin(VLED, VLED_ON);
             control.waitMicros(SAMPLING_TIME);
-            voltage = pins.analogReadPin(VO);
-            if (delta_time > 0) {
+            if (REFERENCE_VOLTAGE = ReferenceVoltage.REFERENCE_VOLTAGE_INT) { 
+		analogvalue = pins.analogReadPinInternalRef(VO);
+	    } else {
+	        analogvalue = pins.analogReadPin(VO);
+            }
+	    if (delta_time > 0) {
                 control.waitMicros(delta_time);
             }
             pins.digitalWritePin(VLED, VLED_OFF);
             control.waitMicros(sleep_time);
-            voltage = REFERENCE_VOLTAGE / 1023 * voltage;
+            voltage = analogvalue * REFERENCE_VOLTAGE / 1023;
             sum_voltage += voltage;
         }
         voltage = sum_voltage / SAMPLES; // mV
