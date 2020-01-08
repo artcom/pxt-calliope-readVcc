@@ -36,13 +36,8 @@ namespace sharpGP2Y1010AU0F {
     export function initDustSensor(vled: DigitalPin, vo: AnalogPin, samples: number, reference: ReferenceVoltage) {
         VLED = vled;
         VO = vo;
-        if (samples) {
-            SAMPLES = samples;
-        }
+        SAMPLES = samples;
 	REFERENCE_VOLTAGE = reference;
-        if ((VLED == 0) || (VO == 0)) {
-            return;
-        }
     }
 
     //% blockId="getSensorRAWValue" block="get RAW value in mV from dustsensor"
@@ -50,7 +45,7 @@ namespace sharpGP2Y1010AU0F {
         let analogvalue = 0.0;
 	let voltage = 0.0;
         let sum_voltage = 0.0;
-        if ((VLED == 0) || (VO == 0)) {
+        if ((VLED == 0) || (VO == 0) || (SAMPLES == 0)) {
             return 0
         }
         let delta_time = PULSE_TIME - SAMPLING_TIME - PINREAD_TIME;
