@@ -7,7 +7,7 @@
  *
  * Optional using nRF51 Internal voltage reference instead of VDD
  */
-//% weight=10 color=#0fbc11 icon=""
+//% weight=10 color=#0fbc11 icon="\uf2dc"
 namespace sharpGP2Y1010AU0F {
     export enum ReferenceVoltage {
 	//% block=Internal Reference Voltage
