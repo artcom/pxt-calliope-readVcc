@@ -7,7 +7,8 @@
  *
  * Optional using nRF51 Internal voltage reference instead of VDD
  */
-//% weight=10 color=#0fbc11 icon="\uf2dc"
+
+//% weight=10 color=#145a32 icon="\uf2dc"
 namespace sharpGP2Y1010AU0F {
     export enum ReferenceVoltage {
 	//% block=Internal Reference Voltage
@@ -15,6 +16,7 @@ namespace sharpGP2Y1010AU0F {
 	//% block=External Reference Voltage
 	REFERENCE_VOLTAGE_EXT = 3000 // mV; external REF nRF51x, USB or battery
     }
+
     const NODUST_VOLTAGE = 600; // mV
     const CONVERSION_RATIO = 20; // μg/m3 / mV, SPEC; in percent
     const WAVESHARE_DIVIDER = 11;
@@ -33,6 +35,8 @@ namespace sharpGP2Y1010AU0F {
     //% vo.defl=AnalogPin.P2
     //% samples.defl=10    
     //% reference.defl=REFERENCE_VOLTAGE_EXT
+
+    //% blockId="initDustSensor" block="Initialisiere Sensor mit DigitalPin %vled | AnlogPin %vo | Referenzspannung %reference"
     export function initDustSensor(vled: DigitalPin, vo: AnalogPin, samples: number, reference: ReferenceVoltage) {
         VLED = vled;
         VO = vo;
@@ -40,7 +44,7 @@ namespace sharpGP2Y1010AU0F {
 	REFERENCE_VOLTAGE = reference;
     }
 
-    //% blockId="getSensorRAWValue" block="get RAW value in mV from dustsensor"
+    //% blockId="getSensorRAWValue" block="Ermittle Messwert in mV"
     export function getSensorRAWValue(): number {
         let analogvalue = 0.0;
 	let voltage = 0.0;
@@ -74,7 +78,7 @@ namespace sharpGP2Y1010AU0F {
         return voltage * WAVESHARE_DIVIDER;
     }
 
-    //% blockId="getDustValue" block="get dust value in μg/m3 from dustsensor."
+    //% blockId="getDustValue" block="Ermittle Feinstaubwert in μg/m3."
     export function getDustValue(): number {
         let dust = 0.0;
         dust = (getSensorRAWValue() - NODUST_VOLTAGE) * CONVERSION_RATIO / 100;
