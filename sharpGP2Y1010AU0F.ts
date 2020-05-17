@@ -11,9 +11,9 @@
 //% weight=10 color=#145a32 icon="\uf2dc"
 namespace sharpGP2Y1010AU0F {
     export enum ReferenceVoltage {
-	//% block=Internal Reference Voltage
+	//% block="Interne Referenzspannung"
 	REFERENCE_VOLTAGE_INT = 1200, // mV; internal REF nRF51x
-	//% block=External Reference Voltage
+	//% block="Externe Referenzspannung"
 	REFERENCE_VOLTAGE_EXT = 3000 // mV; external REF nRF51x, USB or battery
     }
 
@@ -30,13 +30,12 @@ namespace sharpGP2Y1010AU0F {
     let VLED = 0; // digital out PIN
     let VO = 0; // analog in PIN
     let REFERENCE_VOLTAGE = ReferenceVoltage.REFERENCE_VOLTAGE_INT;
-    //% blockId="initDustSensor" block="initialize dustsensor with DigitalPin %vled | AnalogPin %vo| and Samples %samples"
+
+    //% blockId="initDustSensor" block="Initialisiere Sensor mit DigitalPin %vled | AnlogPin %vo | Anzahl Messungen %samples | Referenzspannung %reference"
     //% vled.defl=DigitalPin.P0
     //% vo.defl=AnalogPin.P2
     //% samples.defl=10    
-    //% reference.defl=REFERENCE_VOLTAGE_EXT
-
-    //% blockId="initDustSensor" block="Initialisiere Sensor mit DigitalPin %vled | AnlogPin %vo | Referenzspannung %reference"
+    //% reference.defl="Externe Referenzspannung"
     export function initDustSensor(vled: DigitalPin, vo: AnalogPin, samples: number, reference: ReferenceVoltage) {
         VLED = vled;
         VO = vo;
@@ -78,7 +77,7 @@ namespace sharpGP2Y1010AU0F {
         return voltage * WAVESHARE_DIVIDER;
     }
 
-    //% blockId="getDustValue" block="Ermittle Feinstaubwert in μg/m3."
+    //% blockId="getDustValue" block="Ermittle Feinstaubwert in μg/m3"
     export function getDustValue(): number {
         let dust = 0.0;
         dust = (getSensorRAWValue() - NODUST_VOLTAGE) * CONVERSION_RATIO / 100;
