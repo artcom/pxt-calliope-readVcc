@@ -11,7 +11,7 @@ namespace pins {
      * Based on 1.2V internal reference Voltage of nRF51 ADC 
      * @param name pin to write to, eg: AnalogPin.P0
      */
-    //% blockId="analogReadPinInternalRef" block="analogReadPin based on Internal reference voltage"
+    //% blockId="analogReadPinInternalRef" block="analogReadPin based on Internal reference voltage|pin %name"
     export function analogReadPinInternalRef(name: AnalogPin) {
 	if (!ADC_initialized) {
 	    // init ADC CONFIG
