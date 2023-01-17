@@ -16,13 +16,16 @@ namespace ADCConfig {
     * Read nRF51 Vcc
     */
     //%
-    uint8_t getVcc() {
-	NRF_ADC->CONFIG     &= ~ADC_CONFIG_PSEL_Msk;
-    	NRF_ADC->CONFIG     |= ADC_CONFIG_PSEL_Disabled << ADC_CONFIG_PSEL_Pos;
-    	NRF_ADC->TASKS_START = 1;
-    	while (((NRF_ADC->BUSY & ADC_BUSY_BUSY_Msk) >> ADC_BUSY_BUSY_Pos) == ADC_BUSY_BUSY_Busy) {};
-	    
-        uint8_t* vcc = (uint8_t*)((NRF_ADC->RESULT * 3 * 1200)/255);
+    uint16_t getVcc() {
+	NRF_ADC->EVENTS_END = 0;
+  	NRF_ADC->ENABLE = ADC_ENABLE_ENABLE_Enabled;
+
+ 	NRF_ADC->EVENTS_END = 0; // Stop any running conversions.
+ 	NRF_ADC->TASKS_START = 1;
+
+  	while (!NRF_ADC->EVENTS_END) {
+  	}
+        uint16_t* vcc = (uint8_t*)((NRF_ADC->RESULT * 3 * 1200)/255);
 	NRF_ADC->EVENTS_END = 0;
   	NRF_ADC->TASKS_STOP = 1;
 	return *vcc;
