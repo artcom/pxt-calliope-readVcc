@@ -12,7 +12,7 @@ namespace ADCConfig {
 	return *adresse;
     }
 	
-    uint8_t readVcc() {
+    uint8_t getVcc() {
         uint8_t* vcc = (uint8_t*)(NRF_ADC->RESULT);
 	return *vcc;
     }
