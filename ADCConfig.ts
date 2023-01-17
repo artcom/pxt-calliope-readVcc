@@ -7,8 +7,8 @@ namespace ADCConfig {
 	return 0;
     }
 	
-    export function getVcc(): uint8 {
-	let ADCVal = readVcc();
+    export function readVcc(): uint8 {
+	let ADCVal = getVcc();
 	return ADCVal;
     }
 	
