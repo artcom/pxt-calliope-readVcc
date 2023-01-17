@@ -46,11 +46,11 @@ namespace ADCConfig {
     void setREFSEL() {
 	    
 	*((uint8_t*)(NRF_ADC_CONFIG)) = *((uint8_t*)(NRF_ADC_CONFIG)) |  
-			(ADC_CONFIG_RES_8bit << ADC_CONFIG_RES_Pos) |
-+                      (ADC_CONFIG_INPSEL_SupplyOneThirdPrescaling << ADC_CONFIG_INPSEL_Pos) |
-+                      (ADC_CONFIG_REFSEL_VBG << ADC_CONFIG_REFSEL_Pos) |
-+                      (ADC_CONFIG_PSEL_Disabled << ADC_CONFIG_PSEL_Pos) |
-+                      (ADC_CONFIG_EXTREFSEL_None << ADC_CONFIG_EXTREFSEL_Pos);
+			(ADC_CONFIG_RES_16bit << ADC_CONFIG_RES_Pos) |
+                      	(ADC_CONFIG_INPSEL_SupplyOneThirdPrescaling << ADC_CONFIG_INPSEL_Pos) |
+                      	(ADC_CONFIG_REFSEL_VBG << ADC_CONFIG_REFSEL_Pos) |
+                      	(ADC_CONFIG_PSEL_Disabled << ADC_CONFIG_PSEL_Pos) |
+                      	(ADC_CONFIG_EXTREFSEL_None << ADC_CONFIG_EXTREFSEL_Pos);
     }
 
 }
