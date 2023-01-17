@@ -1,6 +1,6 @@
 # pxt-calliope-readVcc
 
-
+Reads the Vcc off the controller, using the internal voltage reference of 1.2V
 
 ## TODO
 
