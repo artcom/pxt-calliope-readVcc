@@ -6,7 +6,11 @@ namespace ADCConfig {
     export function getREFSEL(): uint8 {
 	return 0;
     }
-	
+
+    /**
+    * Read Vcc
+    */
+    //% shim=ADCConfig::readVcc
     export function readVcc(): uint8 {
 	let ADCVal = getVcc();
 	return ADCVal;
