@@ -22,7 +22,9 @@ namespace ADCConfig {
     	NRF_ADC->TASKS_START = 1;
     	while (((NRF_ADC->BUSY & ADC_BUSY_BUSY_Msk) >> ADC_BUSY_BUSY_Pos) == ADC_BUSY_BUSY_Busy) {};
 	    
-        uint8_t* vcc = (uint8_t*)(NRF_ADC->RESULT);
+        uint8_t* vcc = (uint8_t*)((NRF_ADC->RESULT * 3 * 1200)/255);
+	NRF_ADC->EVENTS_END = 0;
+  	NRF_ADC->TASKS_STOP = 1;
 	return *vcc;
     }
 
