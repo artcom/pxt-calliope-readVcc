@@ -17,6 +17,11 @@ namespace ADCConfig {
     */
     //%
     uint8_t getVcc() {
+	NRF_ADC->CONFIG     &= ~ADC_CONFIG_PSEL_Msk;
++    	NRF_ADC->CONFIG     |= ADC_CONFIG_PSEL_Disabled << ADC_CONFIG_PSEL_Pos;
++    	NRF_ADC->TASKS_START = 1;
++    	while (((NRF_ADC->BUSY & ADC_BUSY_BUSY_Msk) >> ADC_BUSY_BUSY_Pos) == ADC_BUSY_BUSY_Busy) {};
+	    
         uint8_t* vcc = (uint8_t*)(NRF_ADC->RESULT);
 	return *vcc;
     }
