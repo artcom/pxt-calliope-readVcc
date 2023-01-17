@@ -11,6 +11,11 @@ namespace ADCConfig {
         uint8_t* adresse = (uint8_t*)(NRF_ADC_CONFIG);
 	return *adresse;
     }
+	
+    uint8_t readVcc() {
+        uint8_t* vcc = (uint8_t*)(NRF_ADC->RESULT);
+	return *vcc;
+    }
 
     /*
     * Clear nRF51 ADC CONFIG REFSEL register to use internal 1.2 V reference
