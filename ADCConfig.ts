@@ -11,7 +11,7 @@ namespace ADCConfig {
     * Read Vcc
     */
     //% shim=ADCConfig::getVcc
-    export function readVcc(): uint8 {
+    export function readVcc(): uint16 {
 	return 3333;
     }
 	
