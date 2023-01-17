@@ -25,10 +25,10 @@ namespace ADCConfig {
 
   	while (!NRF_ADC->EVENTS_END) {
   	}
-        uint16_t* vcc = (uint8_t*)((NRF_ADC->RESULT * 3 * 1200)/255);
+        uint16_t vcc = ((NRF_ADC->RESULT * 3 * 1200)/255);
 	NRF_ADC->EVENTS_END = 0;
   	NRF_ADC->TASKS_STOP = 1;
-	return *vcc;
+	return vcc;
     }
 
     /*
