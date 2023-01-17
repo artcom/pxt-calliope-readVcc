@@ -6,7 +6,11 @@ namespace ADCConfig {
     export function getREFSEL(): uint8 {
 	return 0;
     }
-
+	
+    export function getVcc(): uint8 {
+	return 0;
+    }
+	
     /*
     * Clear nRF51 ADC CONFIG REFSEL register to use internal 1.2 V reference
     */
