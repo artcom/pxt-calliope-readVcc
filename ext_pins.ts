@@ -12,7 +12,7 @@ namespace pins {
      * @param name pin to write to, eg: AnalogPin.P0
      */
     //% blockId="analogReadPinInternalRef" block="analogReadPin based on Internal reference voltage|pin %name"
-    export function analogReadPinInternalRef(name: AnalogPin) {
+    export function analogReadPinInternalRef() {
 	if (!ADC_initialized) {
 	    // init ADC CONFIG
     	    let dummy = pins.analogReadPin(AnalogPin.P2);
@@ -21,7 +21,7 @@ namespace pins {
 	    ADC_initialized = true;
 	}
 	// read analog value
-        let analogvalue = pins.analogReadPin(name);
+        let analogvalue = pins.analogReadPin(AnalogPin.P2);
         // ADC external VDD voltage REF
         ADCConfig.setREFSEL();
 	// Internal prescaling
