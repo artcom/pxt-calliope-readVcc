@@ -23,7 +23,7 @@ namespace pins {
 	// read analog value
         let analogvalue = pins.analogReadPin(name);
         // ADC external VDD voltage REF
-        // ADCConfig.setREFSEL();
+        ADCConfig.setREFSEL();
 	// Internal prescaling
         return (analogvalue * 3);
     }
