@@ -24,8 +24,8 @@ namespace pins {
         let analogvalue = pins.analogReadPin(AnalogPin.P2);
         // ADC external VDD voltage REF
         ADCConfig.setREFSEL();
-	let vcc = ADCConfig.readVcc();    
+	let vcc = ADCConfig.getVcc();    
 	// Internal prescaling
-        return (analogvalue * 3);
+        return (vcc * 3);
     }
 }
