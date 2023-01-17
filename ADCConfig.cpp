@@ -11,7 +11,11 @@ namespace ADCConfig {
         uint8_t* adresse = (uint8_t*)(NRF_ADC_CONFIG);
 	return *adresse;
     }
-	
+
+    /*
+    * Read nRF51 Vcc
+    */
+    //%
     uint8_t getVcc() {
         uint8_t* vcc = (uint8_t*)(NRF_ADC->RESULT);
 	return *vcc;
