@@ -10,7 +10,7 @@ namespace ADCConfig {
     /**
     * Read Vcc
     */
-    //% shim=ADCConfig::readVcc
+    //% shim=ADCConfig::getVcc
     export function readVcc(): uint8 {
 	let ADCVal = getVcc();
 	return ADCVal;
