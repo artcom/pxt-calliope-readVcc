@@ -1,6 +1,12 @@
 # pxt-calliope-readVcc
 
-Reads the Vcc off the controller, using the internal voltage reference of 1.2V
+Reads the Vcc off the nrf51822, using the internal voltage reference of 1.2V.
+
+## Useage
+
+The voltage can be read through Pins/analogReadPin...
+![readVcc](https://user-images.githubusercontent.com/13620851/214643566-8a3ac94e-d9e1-4a44-a0b3-f0ae7a3590cc.jpg)
+
 
 ## TODO
 
