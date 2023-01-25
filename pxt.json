@@ -1,7 +1,7 @@
 {
-    "name": "pxt-calliope-sharpgp2y1010au0f",
-    "version": "0.0.0",
-    "description": "",
+    "name": "pxt-calliope-readVcc",
+    "version": "0.1.0",
+    "description": "Reads the input voltage of the controller in millivolts",
     "dependencies": {
         "core": "*"
     },
